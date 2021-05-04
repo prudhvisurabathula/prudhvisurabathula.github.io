@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Survey Data</title>
+<style>
+ 
+    td {
+        padding:10px;
+        font-size:18px;   
+    }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+//<![CDATA[
+var decode = function ( text ) {
+    text = text.replace(/\+/g, " ");
+    text = text.replace(/%[a-fA-F0-9]{2}/g, 
+        function ( text ) {
+            return String.fromCharCode( "0x" + text.substr(1,2));
+        }
+    );
+    return text;
+}
+    
+var display_data = function () {
+    alert('-'+location.search+'-');
+    var query = location.search.replace("?", "");
+    if ( query == "" ) return;
+    
+    var fields = query.split("&");
+    
+    if ( fields.length == 0 ) {
+        document.write("<p>No data was submitted.</p>");
+    } else {
+        document.write("<table>");
+        var field_parts;
+        let table="";
+        for ( var i in fields ) {
+            field_parts = fields[i].split("=");
+            field_parts[0] = decode( field_parts[0] );
+            field_parts[1] = decode( field_parts[1] );
+            document.write("<tr><td>" + field_parts[0] + "</td>");
+            document.write("<td>" + field_parts[1] + "</td></tr>");
+            table=table+"<tr><td>"+ field_parts[0]+"</td><td>"+field_parts[1]+"</td></tr>";
+        }
+        
+        document.write("</table>");
+    }
+}
+//]]>
+</script>
+<head>
+    <link rel="stylesheet" type="text/css" href="./assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <ul class="nav">
+            
+        <li  class="nav-item"><a class="active" href="index.html">Home</a></li>
+        <li  class="nav-item"><a href="programdescription.html">CS Program</a></li>
+        <li  class="nav-item"><a href="teachingassistance.html">TA Application</a></li>
+        <li  class="nav-item"><a href="gpacalucator.html">GPA Caluclator</a></li>
+        <li  class="nav-item"><a><img src="./assets/siteimages/logo.png" class="main-logo"></a></li>  
+          
+    </ul>
+
+    <main>
+
+        <div class="show-content" style="border:none">
+            <div class="item"></div>
+            <div class="item2">
+
+                <br><br><br>
+    <h1>Survey Data</h1>
+    <script>display_data();</script>
+    <div id="table"></div>
+</div>
+<div class="item"></div>
+</div>
+</main>
+
+<footer>
+<div class="footer shadow">
+<center>© 2021 Copyright:
+     Prudhvi</a></center>
+
+</div>
+</footer>
+
+
+
+</body>
+</html>
